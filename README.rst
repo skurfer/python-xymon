@@ -6,6 +6,13 @@ This library allows basic communication with a Xymon server directly from a Pyth
 
 Some basic examples are shown here. See ``help(Xymon)`` for details.
 
+Installation
+------------
+
+.. code-block:: bash
+
+    $ pip install Xymon
+
 Getting Started
 ---------------
 
