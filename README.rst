@@ -2,7 +2,7 @@
 Xymon Python Library
 ====================
 
-This library allows basic communication with a Xymon server directly from a Python script. It works with Python 2.6, 2.7, and 3.
+This library allows basic communication with a Xymon server directly from a Python script. It works with Python 2.6, 2.7, and 3. It can be used on a system with no Xymon client installed.
 
 Some basic examples are shown here. See ``help(Xymon)`` for details.
 
