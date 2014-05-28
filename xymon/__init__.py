@@ -32,7 +32,7 @@ class Xymon(object):
         self.port = port
 
     def report(self, host, test, color, message, interval='30m'):
-        """Report data to a Xymon server
+        """Report status to a Xymon server
 
         host:     The hostname to associate the report with.
         test:     The name of the test or service.
@@ -51,6 +51,13 @@ class Xymon(object):
         }
         report = '''status+{interval} {host}.{test} {color} {date}
 {message}\n'''.format(**args)
+        self.send_message(report)
+
+    def send_message(self, message):
+        """Report arbitrary information to the server
+
+        See the xymon(1) man page for message syntax.
+        """
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         except socket.error as msg:
@@ -63,7 +70,7 @@ class Xymon(object):
             return False
         try:
             s.connect((server_ip, self.port))
-            s.sendall(report.encode())
+            s.sendall(message.encode())
             s.close()
             return True
         except socket.error as msg:
