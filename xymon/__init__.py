@@ -50,7 +50,7 @@ class Xymon(object):
             'date': ctime(),
         }
         report = '''status+{interval} {host}.{test} {color} {date}
-{message}\n'''.format(**args)
+{message}'''.format(**args)
         self.send_message(report)
 
     def data(self, host, test, raw_data):
@@ -65,7 +65,7 @@ class Xymon(object):
             'test': test,
             'data': raw_data,
         }
-        report = '''data {host}.{test}\n{data}\n'''.format(**args)
+        report = '''data {host}.{test}\n{data}'''.format(**args)
         self.send_message(report)
 
     def send_message(self, message):
@@ -84,6 +84,7 @@ class Xymon(object):
             ## DNS lookup error
             return False
         try:
+            message = message + '\n'
             s.connect((server_ip, self.port))
             s.sendall(message.encode())
             s.close()
