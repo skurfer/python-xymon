@@ -53,6 +53,21 @@ class Xymon(object):
 {message}\n'''.format(**args)
         self.send_message(report)
 
+    def data(self, host, test, raw_data):
+        """Report data to a Xymon server
+
+        host:     The hostname to associate the report with.
+        test:     The name of the test or service.
+        data:     The RRD data.
+        """
+        args = {
+            'host': host,
+            'test': test,
+            'data': raw_data,
+        }
+        report = '''data {host}.{test}\n{data}\n'''.format(**args)
+        self.send_message(report)
+
     def send_message(self, message):
         """Report arbitrary information to the server
 
