@@ -87,11 +87,12 @@ class Xymon(object):
             message = message + '\n'
             s.connect((server_ip, self.port))
             s.sendall(message.encode())
-            s.close()
             return True
         except socket.error as msg:
             ## connection refused
             return False
+        finally:
+            s.close()
 
     def appfeed(self, host=None, test=None, color=None, cgi=None, ssl=True):
         """Query a Xymon server for the current status of tests
