@@ -8,9 +8,9 @@ with open('README.rst') as doc:
 setup(
     name = "Xymon",
     author = 'Rob McBroom',
-    author_email = 'pypi [at] skurfer.com',
+    author_email = 'pypi@skurfer.com',
     url = 'https://github.com/skurfer/python-xymon',
-    license = "Don't Be a Dick",
+    license = "Don’t Be a Dick",
     packages = ['xymon'],
     version = package_version,
     description = 'Update and query statuses on a Xymon server',
