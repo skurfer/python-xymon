@@ -60,7 +60,7 @@ Getting status data:
         }
     }
 
-This communicates with the server using its ``appfeed.cgi`` interface. If called with no arguments, ``appfeed()`` will return data for all tests on all hosts. Results can be limited by host, test, and color.
+This communicates with the server using its ``appfeed.cgi`` interface. If called with no arguments, ``appfeed()`` will return data for all tests on all hosts. Results can be limited by host, test, page, and color.
 
 Note that ``host`` can be a pattern as described in `Xymon's documentation`_.
 
