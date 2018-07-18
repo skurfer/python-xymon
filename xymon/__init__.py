@@ -7,10 +7,10 @@ from time import ctime
 from collections import defaultdict
 from xml.etree import ElementTree
 if sys.version_info[0] == 2:
-    ## Python 2.x
+    # Python 2.x
     from urllib import urlopen, urlencode
 else:
-    ## Python 3.x
+    # Python 3.x
     from urllib.request import urlopen
     from urllib.parse import urlencode
 
@@ -75,26 +75,29 @@ class Xymon(object):
         """
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        except socket.error as msg:
-            ## socket creation failed
+        except socket.error:
+            # socket creation failed
             return False
         try:
             server_ip = socket.gethostbyname(self.server)
         except socket.gaierror:
-            ## DNS lookup error
+            # DNS lookup error
             return False
         try:
             message = message + '\n'
             s.connect((server_ip, self.port))
             s.sendall(message.encode())
             return True
-        except socket.error as msg:
-            ## connection refused
+        except socket.error:
+            # connection refused
             return False
         finally:
             s.close()
 
-    def appfeed(self, host=None, test=None, page=None, color=None, cgi=None, ssl=True):
+    def appfeed(
+        self, host=None, test=None, page=None,
+        color=None, cgi=None, ssl=True,
+    ):
         """Query a Xymon server for the current status of tests
 
         Returns a dictionary of status information by host, then by test.
@@ -112,7 +115,7 @@ class Xymon(object):
 
         See http://www.xymon.com/xymon/help/manpages/man1/appfeed.cgi.1.html
         """
-        ## default value
+        # default value
         err_host = host if host else 'nohost'
         err_test = test if test else 'notest'
         statuses = {
@@ -174,9 +177,9 @@ class Xymon(object):
                         }
                     }
                 else:
-                    ## convert defaultdict to a normal dictionary
+                    # convert defaultdict to a normal dictionary
                     statuses = dict(statuses)
-            except:
+            except Exception:
                 statuses = {
                     err_host: {
                         err_test: {
@@ -185,7 +188,7 @@ class Xymon(object):
                         }
                     }
                 }
-        except:
+        except Exception:
             statuses = {
                 err_host: {
                     err_test: {
