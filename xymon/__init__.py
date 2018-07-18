@@ -94,7 +94,7 @@ class Xymon(object):
         finally:
             s.close()
 
-    def appfeed(self, host=None, test=None, color=None, cgi=None, ssl=True):
+    def appfeed(self, host=None, test=None, page=None, color=None, cgi=None, ssl=True):
         """Query a Xymon server for the current status of tests
 
         Returns a dictionary of status information by host, then by test.
@@ -133,6 +133,8 @@ class Xymon(object):
             test_filter = 'test={0} {1}'.format(test, test_filter)
         if host is not None:
             test_filter = 'host={0} {1}'.format(host, test_filter)
+        if page is not None:
+            test_filter = 'page={0} {1}'.format(page, test_filter)
         url_params = urlencode({'filter': test_filter})
         base = '{0}://{1}'.format(proto, self.server)
         appfeed = '{0}{1}/appfeed.sh'.format(base, cgi)
