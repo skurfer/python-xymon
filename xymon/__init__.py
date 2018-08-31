@@ -15,7 +15,7 @@ else:
     from urllib.parse import urlencode
 
 
-__version__ = '1.2.0'
+__version__ = '2.0.0'
 
 
 class Xymon(object):
@@ -75,22 +75,13 @@ class Xymon(object):
         """
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        except socket.error:
-            # socket creation failed
-            return False
-        try:
             server_ip = socket.gethostbyname(self.server)
-        except socket.gaierror:
-            # DNS lookup error
-            return False
-        try:
             message = message + '\n'
             s.connect((server_ip, self.port))
             s.sendall(message.encode())
-            return True
-        except socket.error:
-            # connection refused
-            return False
+        except:
+            # Re-raising the exceptions as this should not pass silently.
+            raise
         finally:
             s.close()
 
