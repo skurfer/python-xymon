@@ -73,8 +73,8 @@ class Xymon(object):
 
         See the xymon(1) man page for message syntax.
         """
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         try:
-            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             server_ip = socket.gethostbyname(self.server)
             message = message + '\n'
             s.connect((server_ip, self.port))
