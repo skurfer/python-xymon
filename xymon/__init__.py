@@ -13,7 +13,7 @@ else:
     # Python 3.x
     from urllib.request import urlopen
     from urllib.parse import urlencode
-
+    from xymon import tools
 
 __version__ = '2.0.0'
 
